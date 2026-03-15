@@ -19,6 +19,10 @@ dotnet run
 ```bash
 dotnet test
 ```
+- Spot check in the app to verify.
+    - submit tasks with various names and users
+    - use refresh for each user
+
 
 ## Key endpoints
 - `GET /api/tasks?userId={id}&limit={n}`
@@ -30,9 +34,26 @@ dotnet test
 - **Slow list:** Look for `ListTasks completed` lines with high `elapsedMs` (e.g. `artifacts/sample_slow_list_log.txt`). Correlate `userId` and `limit` with slow requests.
 
 ## Troubleshooting checklist (starter)
+- Test UI by using all button and unsure its functioning (I do this first because this is what the end user sees)
+- Run test script to ensure all tests are passing.
 
 ### “Create task fails with 500”
 - Check API logs in console.
+    - Example failure:
+fail: Microsoft.AspNetCore.Server.Kestrel[13]
+      Connection id "0HNK2MP2T8D24", Request id "0HNK2MP2T8D24:0000000E": An unhandled exception was thrown by the application.
+      System.FormatException: String '' was not recognized as a valid DateTime.
+         at System.DateTime.Parse(String s)
+         at SupportEngineerChallenge.Api.Endpoints.TaskEndpoints.<>c.<<MapTaskEndpoints>b__0_1>d.MoveNext() in /home/carson/dev/SupportEngineerDebugAssignment/src/SupportEngineerChallenge.Api/Endpoints/TaskEndpoints.cs:line 41
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+         at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass102_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+         at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+         at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+         at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+
 - Verify request payload and headers.
 - Look for unhandled exceptions in `POST /api/tasks`.
 
@@ -53,5 +74,6 @@ dotnet test
 
 ## Rollback / mitigation ideas (starter)
 - Roll back to last known good version.
+    - git revert HEAD
 - Temporarily disable problematic client behavior (feature flag / UI change).
 - Add guardrails (e.g. input validation, error handling) to prevent unhandled exceptions.
