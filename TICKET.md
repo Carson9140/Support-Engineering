@@ -13,8 +13,9 @@ What should be improved after the immediate incident is resolved? Several improv
     
 
 ## Acceptance criteria
-- [ ] ... 
-- [ ] ... 
+- [ ] ... No errors.
+- [ ] ... All app functions work as intended.
+- [ ] ... Speed of the app is not noticeable.
 
 ## Notes / context
 - Links to relevant code/areas

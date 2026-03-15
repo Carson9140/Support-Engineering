@@ -2,7 +2,7 @@
 
 **Title:**  500 errors, Slowness, and tasks not organized
 **Date:**  3/15/26
-**Severity:**  High (not emergency)
+**Severity:**  P2
 
 ## Impact
 - Who/what was impacted? All users impacted. May slow down users when using the app and cause frustration but workarounds exits to continue use.
@@ -20,7 +20,7 @@
 
 ## Timeline (UTC)
 - HH:MM — ... 10:00am PST
-- HH:MM — ... 
+- HH:MM — ... 12:15pm PST
 
 ## Root cause
 - What happened and why? 
@@ -96,7 +96,7 @@
 - [X] ... Initially I was unable to use the included test script. Which may have been why these issues were published to production in the first place. Two fixes were needed to get the tests running:
                                          
   1. Missing Microsoft.NET.Test.Sdk package — The test project was missing this package, which is required for dotnet test to discover and run tests. Added it to SupportEngineerChallenge.Tests.csproj.
-  2. Missing using Xunit; — TaskApiTests.cs was using xunit types ([Fact], IClassFixture) without importing the    
+  2. Missing using Xunit; — TaskApiTests.cs was using xunit types ([Fact], IClassFixture) without importing the
   namespace. Added using Xunit; at the top of the file.
 - [ ] ... Todo: While testing I noticed that if I names a task something that had already been taken nothing happened. No task was created which at first was confusing and a bit of a red herring when troubleshooting. Going forward we should either allow duplicate names if that does not cause any issues or if we need unique task names we should display some sort of warning for the user so they know whey their task was not added.
 - [ ] ... Todo: Allow ordering of the list via task number or status so that the organization of the list is less confusing to the end-user.

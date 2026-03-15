@@ -35,7 +35,9 @@ dotnet test
 
 ## Troubleshooting checklist (starter)
 - Test UI by using all button and unsure its functioning (I do this first because this is what the end user sees)
+- Submit tasks via swagger.
 - Run test script to ensure all tests are passing.
+- Review logging of all the above activity and check for anomalies.
 
 ### “Create task fails with 500”
 - Check API logs in console.
